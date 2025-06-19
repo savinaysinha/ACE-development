@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "f1f4eb07-7c87-45b6-a818-3d171a2180e2",
+		"name": "ems_mongoDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrieve",
+			"item": [
+				{
+					"name": "Retrieve All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"and\":[{\"salary\":{\"$gt\":70000}},{\"salary\":{\"$lt\":90000}}]}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve based on id (using query parameter)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?id=685142964afaa51ee228b967",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967"
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"and\":[{\"salary\":{\"$gt\":70000}},{\"salary\":{\"$lt\":90000}}]}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve based on id (using path)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/685142964afaa51ee228b967",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								"685142964afaa51ee228b967"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"and\":[{\"salary\":{\"$gt\":70000}},{\"salary\":{\"$lt\":90000}}]}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{\"first_name\":\"john\"}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"first_name\":\"john\"}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{\"salary\": { \"$gt\":75000}}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"salary\": { \"$gt\":75000}}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{ \"email\": { \"$regex\": \"@example.com$\", \"$options\": \"i\" } }}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{ \"email\": { \"$regex\": \"@example.com$\", \"$options\": \"i\" } }}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_4",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{\"and\":[{\"salary\":{\"$gte\":60000}},{\"salary\":{\"$lte\":75000}}]}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"and\":[{\"salary\":{\"$gte\":60000}},{\"salary\":{\"$lte\":75000}}]}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_5",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{\"first_name\":{\"$regex\": \"^j\",\"$options\": \"i\"}}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"first_name\":{\"$regex\": \"^j\",\"$options\": \"i\"}}}"
+								},
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_6",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{ \"phone_number\": { \"$regex\": \"^98\\\\d{8}$\" } }}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{ \"phone_number\": { \"$regex\": \"^98\\\\d{8}$\" } }}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_7",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{ \"job_title\": { \"$regex\": \"manager\", \"$options\": \"i\" } }}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{ \"job_title\": { \"$regex\": \"manager\", \"$options\": \"i\" } }}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive using filterString_8",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?filterString={\"where\":{\"$or\":[{\"first_name\":{\"$options\":\"i\",\"$regex\":\"john\"}},{\"last_name\":{\"$options\":\"i\",\"$regex\":\"john\"}},{\"email\":{\"$options\":\"i\",\"$regex\":\"john\"}},{\"job_title\":{\"$options\":\"i\",\"$regex\":\"john\"}}]}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967",
+									"disabled": true
+								},
+								{
+									"key": "filterString",
+									"value": "{\"where\":{\"$or\":[{\"first_name\":{\"$options\":\"i\",\"$regex\":\"john\"}},{\"last_name\":{\"$options\":\"i\",\"$regex\":\"john\"}},{\"email\":{\"$options\":\"i\",\"$regex\":\"john\"}},{\"job_title\":{\"$options\":\"i\",\"$regex\":\"john\"}}]}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"david\",\r\n    \"last_name\": \"lee\",\r\n    \"email\": \"david.lee@example.com\",\r\n    \"phone_number\": \"9876543214\",\r\n    \"job_title\": \"qa analyst\",\r\n    \"salary\": 55000\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "Delete based on id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?id=6852d2d3f23c86fe3dafb5d5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6852d2d3f23c86fe3dafb5d5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"item": [
+				{
+					"name": "Update based on id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\" : \"john updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7800/ems/v1/?id=685142964afaa51ee228b967",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7800",
+							"path": [
+								"ems",
+								"v1",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "685142964afaa51ee228b967"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,74 @@
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_RetrieveEmployee
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CREATE LASTCHILD OF OutputRoot.JSON.Data DOMAIN 'JSON' TYPE JSON.Array NAME 'employees';
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		SET outRef.employees = InputRoot.JSON.Data;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_CreateEmployee
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Create';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';		
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_UpdateEmployee
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Update';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';		
+		SET OutputLocalEnvironment.Destination.Loopback.Request.externalIdName = FIELDNAME(InputRoot.JSON.Data.[<]);
+		SET OutputLocalEnvironment.Destination.Loopback.Request.Id = COALESCE(InputLocalEnvironment.HTTP.Input.QueryString.id,InputLocalEnvironment.HTTP.Input.Path.Segment[<],NULL);
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_Check_Query_OR_Path
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Retrieve';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';
+		
+		-- Below Property retrives a single record based on LoopBack® object ID
+		SET OutputLocalEnvironment.Destination.Loopback.Request.id = COALESCE(InputLocalEnvironment.HTTP.Input.QueryString.id,InputLocalEnvironment.HTTP.Input.Path.Segment[3],NULL);
+		
+		--You can use it to set any filter that the connector supports
+--		SET OutputLocalEnvironment.Destination.Loopback.Request.filterString = '{"where":{"first_name": "john"}}';
+		
+		SET OutputLocalEnvironment.Destination.Loopback.Request.filterString = COALESCE(InputLocalEnvironment.HTTP.Input.QueryString.filterString,NULL);
+	RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_Check_Query_OR_Path_delete
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Delete';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';
+		
+		-- Below Property delete a single record based on LoopBack® object ID
+		SET OutputLocalEnvironment.Destination.Loopback.Request.id = COALESCE(InputLocalEnvironment.HTTP.Input.QueryString.id,InputLocalEnvironment.HTTP.Input.Path.Segment[3],NULL);
+	RETURN TRUE;
+	END;
+END MODULE;
+
