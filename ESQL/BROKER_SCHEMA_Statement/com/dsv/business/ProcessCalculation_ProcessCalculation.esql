@@ -1,0 +1,20 @@
+BROKER SCHEMA com.dsv.business
+	PATH com.dsv.utility;
+
+CREATE COMPUTE MODULE ProcessCalculation_ProcessCalculation
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE result INTEGER;
+		DECLARE env REFERENCE TO Environment;
+		CALL com.dsv.logging.Logging('Process Start',env);
+		
+		SET result = Addition(InputRoot.JSON.Data.Addition.Number1,InputRoot.JSON.Data.Addition.Number2);
+		
+		SET OutputRoot.JSON.Data.Logging = Environment.Logging;
+		SET OutputRoot.JSON.Data.Result = result;
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;

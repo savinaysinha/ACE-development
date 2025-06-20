@@ -1,0 +1,36 @@
+
+CREATE COMPUTE MODULE Simple_CASE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.Product;
+		
+		CASE inputRef.OrderType
+		WHEN 'Express' THEN
+			SET OutputRoot.JSON.Data.Status = 'Fast Processing';
+		ELSE
+			SET OutputRoot.JSON.Data.Status = 'Standard Processing';
+		END CASE;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SEARCHED_CASE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.Product;
+		
+		CASE 
+		WHEN inputRef.Amount > 1000 THEN
+			SET OutputRoot.JSON.Data.Status = 'High Value';
+		WHEN inputRef.Amount BETWEEN 500 AND 1000 THEN
+			SET OutputRoot.JSON.Data.Status = 'Medium Value';			
+		ELSE
+			SET OutputRoot.JSON.Data.Status = 'Low Value';
+		END CASE;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

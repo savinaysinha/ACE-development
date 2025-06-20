@@ -1,0 +1,77 @@
+
+
+CREATE COMPUTE MODULE LogicalOperators_AND_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.PersonDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outputRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		--Check person is only eligible to drive if his age is greater than 18 and must carry a driving licence
+		
+		IF inputRef.Age >= 18 AND inputRef.HasDrivingLicense THEN
+			SET outputRef.AndCheck = 'Person is eligible to drive';
+		ELSE
+			SET outputRef.AndCheck = 'Person is not eligible to drive';
+		END IF;
+		
+		
+
+		RETURN TRUE;
+	END;
+
+END MODULE;
+
+
+CREATE COMPUTE MODULE LogicalOperators_OR_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.PersonDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outputRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		--Check person live in either USA or UK
+		
+		IF inputRef.Country = 'USA' OR inputRef.Country = 'UK' THEN
+			SET outputRef.AndCheck = 'Person lives in either USA or UK';
+		ELSE
+			SET outputRef.AndCheck = 'Person neither lives in USA nor UK';
+		END IF;
+		
+		
+
+		RETURN TRUE;
+	END;
+
+END MODULE;
+
+CREATE COMPUTE MODULE LogicalOperators_NOT_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.PersonDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outputRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		--Check person is employed 
+		
+		IF NOT inputRef.IsEmployed THEN
+			SET outputRef.AndCheck = 'Person is not Employed';
+		ELSE
+			SET outputRef.AndCheck = 'Person is Employed';
+		END IF;
+		
+		
+
+		RETURN TRUE;
+	END;
+
+END MODULE;

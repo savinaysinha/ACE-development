@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE COALESCE_1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.address;
+		CREATE FIELD OutputRoot.JSON.Data;
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.Address = COALESCE(inputRef.addressLine1,inputRef.addressLine2,inputRef.addressLine3,inputRef.addressLine4);
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;

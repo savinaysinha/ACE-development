@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <InputMessage timestamp="1749201727807" nodeId="FCMComposite_1_1" name="Payload-1" id="1749201727807-1826">
+        <plainText>%7B%0D%0A++++%22address%22%3A%7B%0D%0A++++++++%22addressLine1%22+%3A+null%2C%0D%0A++++++++%22addressLine2%22+%3A+null%2C%0D%0A++++++++%22addressLine3%22+%3A+null%2C%0D%0A++++++++%22addressLine4%22+%3A+null%0D%0A++++%7D%0D%0A%7D</plainText>
+    </InputMessage>
+</MessagePool>

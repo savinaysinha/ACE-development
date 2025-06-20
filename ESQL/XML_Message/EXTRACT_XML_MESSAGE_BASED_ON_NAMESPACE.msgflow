@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE.msgflow" nsPrefix="EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" nodeLayoutStyle="RECTANGLE">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE" bundleName="EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE" pluginId="XML_Message"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XML_Message/icons/full/obj16/EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XML_Message/icons/full/obj30/EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="20,20" URLSpecifier="/XML" messageDomainProperty="XMLNSC" faultFormat="JSON">
+        <translation xmi:type="utility:ConstantString" string="/XML"/>
+      </nodes>
+      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="944,43">
+        <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="470,137" computeExpression="esql://routine/#EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE_Compute.Main">
+        <translation xmi:type="utility:ConstantString" string="Compute"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard>
+      <stickyNote location="77,213">
+        <body xmi:type="utility:ConstantString" string="INPUT PAYLOAD:&#xA;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;root xmlns=&quot;http://example.com/default&quot;&#xD;&#xA;      xmlns:hr=&quot;http://example.com/hr&quot;&#xD;&#xA;      xmlns:it=&quot;http://example.com/it&quot;&#xD;&#xA;      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xD;&#xA;      xsi:schemaLocation=&quot;http://example.com/default default.xsd &#xD;&#xA;                          http://example.com/hr hr.xsd &#xD;&#xA;                          http://example.com/it it.xsd&quot;>&#xD;&#xA;&#xD;&#xA;    &lt;company name=&quot;TechCorp&quot; location=&quot;New York&quot;>&#xD;&#xA;        &lt;hr:department id=&quot;D001&quot; name=&quot;Human Resources&quot;>&#xD;&#xA;            &lt;hr:employee id=&quot;E1001&quot; gender=&quot;female&quot;>&#xD;&#xA;                &lt;hr:name>Jane Doe&lt;/hr:name>&#xD;&#xA;                &lt;hr:position>HR Manager&lt;/hr:position>&#xD;&#xA;                &lt;hr:contact email=&quot;jane.doe@example.com&quot; phone=&quot;123-456-7890&quot;/>&#xD;&#xA;            &lt;/hr:employee>&#xD;&#xA;            &lt;hr:employee id=&quot;E1002&quot; gender=&quot;male&quot;>&#xD;&#xA;                &lt;hr:name>John Smith&lt;/hr:name>&#xD;&#xA;                &lt;hr:position>Recruiter&lt;/hr:position>&#xD;&#xA;                &lt;hr:contact email=&quot;john.smith@example.com&quot; phone=&quot;123-456-7891&quot;/>&#xD;&#xA;            &lt;/hr:employee>&#xD;&#xA;        &lt;/hr:department>&#xD;&#xA;&#xD;&#xA;        &lt;it:department id=&quot;D002&quot; name=&quot;Information Technology&quot;>&#xD;&#xA;            &lt;it:employee id=&quot;E2001&quot; gender=&quot;male&quot;>&#xD;&#xA;                &lt;it:name>Michael Chen&lt;/it:name>&#xD;&#xA;                &lt;it:position>Software Engineer&lt;/it:position>&#xD;&#xA;                &lt;it:skills>&#xD;&#xA;                    &lt;it:skill language=&quot;Java&quot;>Advanced&lt;/it:skill>&#xD;&#xA;                    &lt;it:skill language=&quot;Python&quot;>Intermediate&lt;/it:skill>&#xD;&#xA;                &lt;/it:skills>&#xD;&#xA;            &lt;/it:employee>&#xD;&#xA;        &lt;/it:department>&#xD;&#xA;    &lt;/company>&#xD;&#xA;&lt;/root>&#xD;&#xA;"/>
+      </stickyNote>
+      <stickyNote location="742,222">
+        <body xmi:type="utility:ConstantString" string="OUTPUT PAYLOAD:&#xA;&lt;employees xmlns=&quot;http://example.com/it&quot;>&#xD;&#xA;    &lt;employee>&#xD;&#xA;        &lt;id>E2001&lt;/id>&#xD;&#xA;        &lt;gender>male&lt;/gender>&#xD;&#xA;        &lt;name>Michael Chen&lt;/name>&#xD;&#xA;        &lt;position>Software Engineer&lt;/position>&#xD;&#xA;        &lt;skills>&#xD;&#xA;            &lt;skill language=&quot;Java&quot;>Advanced&lt;/skill>&#xD;&#xA;            &lt;skill language=&quot;Python&quot;>Intermediate&lt;/skill>&#xD;&#xA;        &lt;/skills>&#xD;&#xA;        &lt;department>Information Technology&lt;/department>&#xD;&#xA;    &lt;/employee>&#xD;&#xA;&lt;/employees>"/>
+      </stickyNote>
+    </stickyBoard>
+  </eClassifiers>
+</ecore:EPackage>

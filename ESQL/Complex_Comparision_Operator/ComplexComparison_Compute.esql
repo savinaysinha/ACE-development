@@ -1,0 +1,160 @@
+
+
+CREATE COMPUTE MODULE ComplexComparison_BETWEEN_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.CustomerDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		
+		-- Use Between
+		
+		IF inputRef.Age BETWEEN 18 AND 60 THEN
+			SET outRef.BetweenCheck = 'Age is within range of 18-60';
+		ELSE
+			SET outRef.BetweenCheck = 'Age is not within range of 18-60';
+		END IF;
+		
+		 
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ComplexComparison_EXISTS_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.CustomerDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		
+		-- Use of Exists
+		
+		DECLARE customerIDExists BOOLEAN;
+		SET customerIDExists = EXISTS(inputRef.CustomerID[]);
+		
+		IF customerIDExists THEN
+			SET outRef.ExistsCheck = 'CustomerID exisits in input';
+		ELSE
+			SET outRef.ExistsCheck = 'CustomerID not exisits in input';
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+
+CREATE COMPUTE MODULE ComplexComparison_IN_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.CustomerDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		
+		-- Use of IN
+		DECLARE checkCountry BOOLEAN;
+		SET checkCountry = inputRef.Country IN ('UAE','USA','UK');
+		
+		IF checkCountry THEN
+			SET outRef.InCheck = 'Country is in list("UAE","USA","UK")';
+		ELSE
+			SET outRef.InCheck = 'Country is not in list("UAE","USA","UK")';
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+
+CREATE COMPUTE MODULE ComplexComparison_IS_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.CustomerDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		
+		
+		DECLARE checkEmail,checkDataTypeOgAge BOOLEAN;
+		-- Use of IS to check null
+		SET checkEmail = inputRef.Email IS NULL;
+		-- Use of IS 
+		SET checkDataTypeOgAge = inputRef.Age IS NUMBER;		
+				
+		IF checkEmail THEN
+			SET outRef.IsCheck_1 = 'Email is null';
+		ELSE
+			SET outRef.InCheck_1 = 'Email is not null';
+		END IF;
+		
+		
+		IF checkDataTypeOgAge THEN
+			SET outRef.IsCheck_2 = 'Age is a number';
+		ELSE
+			SET outRef.InCheck_2 = 'Age is not a number';
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ComplexComparison_LIKE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.CustomerDetails;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		
+		
+		DECLARE checkName,checkEmail,checkCountry BOOLEAN;
+		
+		-- Use of LIKE - checking if name ends with 'a'
+		SET checkName = inputRef.Name LIKE '%a';
+		
+		-- Use of LIKE - checking if Email contains '@'
+		SET checkEmail = inputRef.Email LIKE '%@%';	
+		
+		-- Use of LIKE - checking if country is of two
+		SET checkCountry = inputRef.Country LIKE '__';			
+				
+		IF checkName THEN
+			SET outRef.LikeCheck_1 = 'name ends with a';
+		ELSE
+			SET outRef.LikeCheck_1 = 'name does not end with a';
+		END IF;
+		
+		IF checkEmail THEN
+			SET outRef.LikeCheck_2 = 'Email Contains @';
+		ELSE
+			SET outRef.LikeCheck_2 = 'Email does not Contain @';
+		END IF;
+		
+		IF checkCountry THEN
+			SET outRef.LikeCheck_3 = 'Country is of two characters';
+		ELSE
+			SET outRef.LikeCheck_3 = 'Country is not of two characters';
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

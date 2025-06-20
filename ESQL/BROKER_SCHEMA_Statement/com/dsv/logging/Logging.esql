@@ -1,0 +1,6 @@
+BROKER SCHEMA com.dsv.logging
+
+CREATE PROCEDURE Logging (IN msg CHARACTER, INOUT env REFERENCE)
+BEGIN
+	SET env.Logging = msg;
+END;

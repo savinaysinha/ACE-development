@@ -1,0 +1,38 @@
+BROKER SCHEMA Exception_Handling
+
+
+CREATE COMPUTE MODULE Exception_Handling
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CREATE LASTCHILD OF OutputRoot.JSON DOMAIN 'JSON' NAME 'Data';
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data ;
+		IF EXISTS(InputExceptionList.[]) THEN
+			DECLARE i INTEGER 1;
+			DECLARE exceptionType CHARACTER '';
+			DECLARE exceptionText ROW;
+			DECLARE excText CHARACTER '';
+			DECLARE excRef REFERENCE TO InputExceptionList.[>];
+			DECLARE lastExceptionTree ROW;
+			X:WHILE LASTMOVE(excRef) DO
+				IF CONTAINS(UCASE(FIELDNAME(excRef)), 'EXCEPTION') THEN
+					SET exceptionType = CAST(FIELDNAME(excRef) AS CHARACTER);
+					SET outRef.Exception.Type = exceptionType;
+					SET lastExceptionTree = excRef;
+				END IF;
+				SET exceptionText.Text[i] = SELECT R.Text AS Text FROM excRef AS R;
+				IF LENGTH(exceptionText.Text[i].Text) > 5 THEN
+					SET excText = excText || ' - ' ||exceptionText.Text[i].Text;	
+				END IF;
+				SET i = i + 1;
+				MOVE excRef LASTCHILD;	
+		END WHILE X;
+				SET outRef.Exception.Text = TRIM(LEADING ' - ' FROM excText);
+				SET outRef.Exception.Number = lastExceptionTree.Number;
+				SET outRef.Exception.Location = lastExceptionTree.Label;
+		ELSE 
+			SET outRef = InputRoot.JSON.Data;
+		END IF;
+		RETURN TRUE;
+	END;
+
+END MODULE;

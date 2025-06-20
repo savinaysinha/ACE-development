@@ -1,0 +1,59 @@
+
+
+CREATE COMPUTE MODULE SELECT_STATEMENT_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inRef REFERENCE TO InputRoot.XMLNSC;
+		CREATE LASTCHILD OF OutputRoot.JSON DOMAIN 'JSON' NAME 'Data';
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		SET outRef.ProductCatlog.Products TYPE = JSON.Array;
+
+		-- Selecting All data from payload Trees 
+		SET outRef.ProductCatlog.Products.Item[] = SELECT * FROM inRef.ProductCatalog[];
+		
+		-- Selecting All data from payload Trees using Alias
+--		SET outRef.ProductCatlog.Products.Item[] = SELECT R FROM inRef.ProductCatalog.Product[] AS R;
+		
+		-- Selecting a particular fields  
+/*		SET outRef.ProductCatlog.Products.Item[] = SELECT R.ProductName,R.Price FROM inRef.ProductCatalog.Product[] AS R;
+*/		
+		-- Putting String operation on selected Items
+/*		SET outRef.ProductCatlog.Products.Item[] = 
+													SELECT R.ProductName,R.Price.currency|| ' ' ||R.Price AS Price 
+														FROM inRef.ProductCatalog.Product[] AS R;
+*/		
+		/*Selecting a particular item and changing its name in the output, Putting Arithmatic Operation and Putting String operation on selected Items*/ 	
+/*		SET outRef.ProductCatlog.Products.Item[] = 
+											SELECT R.ProductName,R.Price.currency|| ' ' ||CAST(CAST(R.Price AS DECIMAL)*2 AS CHARACTER) AS Price 
+												FROM inRef.ProductCatalog.Product[] AS R;
+*/												
+		
+		
+		-- Selecting only first Item from the list (THE Function)
+/*		SET outRef.ProductCatlog.Products.Item = THE(SELECT R FROM inRef.ProductCatalog.Product[] AS R);				
+*/												
+		-- Selecting All data from payload Trees using WHERE clause
+--		SET outRef.ProductCatlog.Products.Item[] = SELECT R FROM inRef.ProductCatalog.Product[] AS R WHERE R.ProductID = 103;		
+		
+		-- Selecting All data from payload Trees using WHERE clause
+--		SET outRef.ProductCatlog.Products.Item[] = SELECT R FROM inRef.ProductCatalog.Product[] AS R WHERE R.Price > 25.00;											
+		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

@@ -1,0 +1,21 @@
+
+
+CREATE COMPUTE MODULE AccessingChileElements_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inRef REFERENCE TO InputRoot.JSON.Data.user;
+		CREATE FIELD OutputRoot.JSON.Data;
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.FirstElement = inRef.[>];
+		SET outRef.LastElement = inRef.[<];
+		
+		SET outRef.FirstElementUsingIndexing = inRef.[1];
+		SET outRef.SecondElementUsingIndexing = inRef.[2];
+		SET outRef.LastElementUsingIndexing = inRef.[3];
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;

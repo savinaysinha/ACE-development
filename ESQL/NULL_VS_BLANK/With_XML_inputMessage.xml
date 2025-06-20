@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <InputMessage timestamp="1749132527181" nodeId="FCMComposite_1_3" name="null within tag" id="1749132527181-98">
+        <plainText>%3CEmployee%3E%0D%0A%3CEmpId%3E123%3C%2FEmpId%3E%0D%0A%3CEmpName%3ESam+Barns%3C%2FEmpName%3E%0D%0A%3CEmpDesignation%3ESoftware+Engineer%3C%2FEmpDesignation%3E%0D%0A%3CEmpAddress%3Enull%3C%2FEmpAddress%3E%0D%0A%3C%2FEmployee%3E</plainText>
+    </InputMessage>
+    <InputMessage timestamp="1749132582659" nodeId="FCMComposite_1_3" name="withoutTag" id="1749132582659-157">
+        <plainText>%3CEmployee%3E%0D%0A%3CEmpId%3E123%3C%2FEmpId%3E%0D%0A%3CEmpName%3ESam+Barns%3C%2FEmpName%3E%0D%0A%3CEmpDesignation%3ESoftware+Engineer%3C%2FEmpDesignation%3E%0D%0A%3C%2FEmployee%3E</plainText>
+    </InputMessage>
+</MessagePool>

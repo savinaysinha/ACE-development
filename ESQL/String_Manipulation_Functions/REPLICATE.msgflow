@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="REPLICATE.msgflow" nsPrefix="REPLICATE.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" nodeLayoutStyle="RECTANGLE">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="REPLICATE" bundleName="REPLICATE" pluginId="String_Manipulation_Functions"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/String_Manipulation_Functions/icons/full/obj16/REPLICATE.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/String_Manipulation_Functions/icons/full/obj30/REPLICATE.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="105,64" URLSpecifier="/test31" messageDomainProperty="JSON">
+        <translation xmi:type="utility:ConstantString" string="/test31"/>
+      </nodes>
+      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="835,85">
+        <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="453,225" computeExpression="esql://routine/#StringManipulationFunctions_REPLICATE_Compute.Main">
+        <translation xmi:type="utility:ConstantString" string="REPLICATE"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard>
+      <stickyNote location="46,292">
+        <body xmi:type="utility:ConstantString" string="In Payload invoice ID is coming make sure it is of 10 character long.&#xA;If it is not 10 character long append 0 in front of it.&#xA;input:&#xA;invoiceId: &quot;5612&quot;&#xA;output:&#xA;invoiceId : &quot;0000005612&quot;&#xA;&#xA;Payload:&#xA;{&#xD;&#xA;    &quot;Bill&quot; : {&#xD;&#xA;        &quot;InvoiceId&quot; : &quot;89654365&quot;&#xD;&#xA;    }&#xD;&#xA;}&#xA;"/>
+      </stickyNote>
+    </stickyBoard>
+  </eClassifiers>
+</ecore:EPackage>

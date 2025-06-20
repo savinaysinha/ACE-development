@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <InputMessage timestamp="1749194153768" nodeId="FCMComposite_1_1" name="Payload with Email set null and age is integer" id="1749194153768-1148">
+        <plainText>%7B%0D%0A++++%22CustomerDetails%22%3A+%7B%0D%0A++++++++%22Age%22%3A+63%2C%0D%0A++++++++%22Country%22%3A+%22UK%22%2C%0D%0A++++++++%22Name%22%3A+%22Lisa%22%2C%0D%0A++++++++%22Email%22%3A+null%2C%0D%0A++++++++%22CustomerID%22%3A+123%2C%0D%0A++++++++%22IsGoldCustomer%22%3Afalse%0D%0A++++%7D%0D%0A%7D%0D%0A</plainText>
+    </InputMessage>
+    <InputMessage timestamp="1749194209746" nodeId="FCMComposite_1_1" name="Payload with Email and Age in String" id="1749194209746-1201">
+        <plainText>%7B%0D%0A++++%22CustomerDetails%22%3A+%7B%0D%0A++++++++%22Age%22%3A+%22Sixty+Three%22%2C%0D%0A++++++++%22Country%22%3A+%22UK%22%2C%0D%0A++++++++%22Name%22%3A+%22Lisa%22%2C%0D%0A++++++++%22Email%22%3A+%22example%40gmail.com%22%2C%0D%0A++++++++%22CustomerID%22%3A+123%2C%0D%0A++++++++%22IsGoldCustomer%22%3Afalse%0D%0A++++%7D%0D%0A%7D%0D%0A</plainText>
+    </InputMessage>
+</MessagePool>

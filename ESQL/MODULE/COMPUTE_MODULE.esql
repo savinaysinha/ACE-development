@@ -1,0 +1,29 @@
+
+
+CREATE COMPUTE MODULE COMPUTE_MODULE
+--	Beginning Of Compute Module
+
+	DECLARE moduleVar INTEGER;
+	DECLARE intConst CONSTANT INTEGER 36; 
+	
+	CREATE FUNCTION Main( ) RETURNS BOOLEAN
+	BEGIN
+		SET moduleVar = 25;
+--		CALL TestProc();
+		DECLARE av CHARACTER TestFunc();
+		RETURN TRUE;
+	END;
+	
+	CREATE PROCEDURE TestProc ()
+	BEGIN
+		SET OutputRoot.JSON.Data.Result = moduleVar;
+	END;
+	
+	CREATE FUNCTION  TestFunc( ) RETURNS CHAR
+	BEGIN
+		SET OutputRoot.JSON.Data.Result = 'Success';
+		RETURN 'Hello';
+	END;
+
+--	Ending Of Compute Module	
+END MODULE;

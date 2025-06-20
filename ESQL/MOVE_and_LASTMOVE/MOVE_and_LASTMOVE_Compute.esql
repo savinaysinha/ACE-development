@@ -1,0 +1,52 @@
+
+
+CREATE COMPUTE MODULE MOVE_and_LASTMOVE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE inRef REFERENCE TO InputRoot.JSON.Data.user;
+		DECLARE inRef2 REFERENCE TO inRef;
+		CREATE LASTCHILD OF OutputRoot.JSON DOMAIN 'JSON' NAME 'Data';
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE isLastMove BOOLEAN;
+		
+		SET outRef.Payload.Orginal = inRef;
+		
+		-- Re-Reference the inRef to its FirstChild
+		MOVE inRef TO inRef.[>];
+		
+		SET outRef.Payload.FirstChild = inRef;
+		
+		-- Re-Reference the inRef to its next sibling
+		MOVE inRef NEXTSIBLING;
+		
+		SET outRef.Payload.NextChild = inRef;
+		
+		-- Re-Reference the inRef to its LAST child
+		MOVE inRef LASTCHILD;
+		
+		-- Here LASTMOVE checks whether the current previos MOVE is successfully reference to other reference 
+		SET isLastMove = LASTMOVE(inRef);
+		
+		SET outRef.Payload.LastChild = inRef;
+		SET outRef.Payload.isLastMove = isLastMove;
+		
+		
+		MOVE inRef TO inRef2;
+		
+		MOVE inRef LASTCHILD;
+		SET isLastMove = LASTMOVE(inRef);
+		IF isLastMove  THEN
+			SET outRef.Payload.LastChild = inRef;
+		END IF;
+		
+		
+		MOVE inRef PREVIOUSSIBLING;
+		SET outRef.Payload.PREVIOUSSIBLING = inRef;
+		
+		MOVE inRef TO inRef2;
+		MOVE inRef FIRSTCHILD;
+		SET outRef.Payload.AgainFirstChild = inRef;
+		RETURN TRUE;
+	END;
+END MODULE;

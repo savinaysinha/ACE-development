@@ -1,0 +1,365 @@
+
+
+CREATE COMPUTE MODULE StringManipulationFunctions_CONTAINS_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Check if input payload field Address Contains Ghaziabad
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		DECLARE checkAddress BOOLEAN;
+		
+		SET checkAddress = CONTAINS(InputRef.address,'Ghaziabad');
+		
+		IF checkAddress THEN
+			SET outRef.Result = 'Address Contains Ghaziabad';
+		ELSE
+			SET outRef.Result = 'Address does not Contain Ghaziabad';
+		END IF;
+		
+		
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_STARTSWITH_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Check if input payload field Name starts with 'Alice'
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		IF STARTSWITH(InputRef.name,'Alice') THEN
+			SET outRef.Result = 'Name starts with Alice';
+		ELSE
+			SET outRef.Result = 'Name does not start with Alice';
+		END IF;
+		
+		
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_ENDSWITH_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Check if input payload field email ends with '.com'
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		IF ENDSWITH(InputRef.email,'.com') THEN
+			SET outRef.Result = 'Email ends with .com';
+		ELSE
+			SET outRef.Result = 'Email does not end with .com';
+		END IF;
+		
+		
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+
+CREATE COMPUTE MODULE StringManipulationFunctions_LEFT_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Fetched the first 10 character from Payload field email
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.Result = LEFT(InputRef.email,10);
+		
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_RIGHT_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Fetched the last 10 character of Payload field email
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.Result = RIGHT(InputRef.email,10);
+		
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_LENGTH_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Fetched the length of Payload field email
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.Result = 'Lenght of Email field value is ' || CAST(LENGTH(InputRef.email) AS CHARACTER);
+		
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_UCASE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make email field value in upper case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.ucase = UCASE(InputRef.email);
+		SET outRef.upper = UPPER(InputRef.email);
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_LCASE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.LCASE = LCASE(InputRef.name);
+		SET outRef.LOWER = LOWER(InputRef.name);
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_SUBSTRING_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.email = InputRef.email;
+		SET outRef.SUBSTRING = SUBSTRING(InputRef.email FROM 5);
+		SET outRef.SUBSTRING_WITH_FOR = SUBSTRING(InputRef.email FROM 5 FOR 10);
+		SET outRef.SUBSTRING_WITH_FOR = SUBSTRING(InputRef.email FROM 5 FOR 10);
+		SET outRef.SUBSTRING_BEFORE = SUBSTRING(InputRef.email BEFORE '@');
+		SET outRef.SUBSTRING_BEFORE_WITH_FOR = SUBSTRING(InputRef.email BEFORE '@' FOR 10);
+		SET outRef.SUBSTRING_AFTER = SUBSTRING(InputRef.email AFTER '@');
+		SET outRef.SUBSTRING_AFTER_WITH_FOR = SUBSTRING(InputRef.email AFTER '@' FOR 5);			
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_OVERLAY_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.email = InputRef.email;
+		SET outRef.OVERLAY = OVERLAY(InputRef.email PLACING 'savinay' FROM 1);
+		SET outRef.OVERLAY_1 = OVERLAY(InputRef.email PLACING 'savinay' FROM 1 FOR 2);
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_POSITION_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.email = InputRef.email;
+		SET outRef."Position of @ in Email Field" = POSITION('@' IN InputRef.email);
+		SET outRef."Position of 'com' in EMAIL Field" = POSITION(LCASE('COM') IN InputRef.email);
+		SET outRef."Position of 'Savi' in EMAIL Field" = POSITION('Savi' IN InputRef.email);
+		SET outRef."Position of 'a' falling 2nd times in EMAIL field" = POSITION('a' IN InputRef.email REPEAT 2);
+		SET outRef."Position of 'o' falling 3rd times in EMAIL field" = POSITION('o' IN InputRef.email REPEAT 3);
+		SET outRef."Position of '@' falling 2nd times in EMAIL field" = POSITION('@' IN InputRef.email REPEAT 3);
+		SET outRef."Position of 'o' falling 3 times from rhs in EMAIL field_2" = POSITION('o' IN InputRef.email REPEAT -3);
+		SET outRef."Position of '.' After first 7 characters in EMAIL field" = POSITION('.' IN InputRef.email FROM 7);
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_REPLACE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.name = InputRef.name;
+		SET outRef."Replace space from name" = REPLACE(InputRef.name, ' ', '');
+		SET outRef."Replace space with undescore from name" = REPLACE(InputRef.name, ' ', '_');
+		SET outRef.email = InputRef.email;
+		SET outRef."Replace gmail from email to XXX" = REPLACE(InputRef.email, 'gmail', 'XXX');
+		SET outRef."REMOVE gmail from email" = REPLACE(InputRef.email, 'gmail');
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_REPLICATE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.Bill;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.OriginalInvoiceID = InputRef.InvoiceId;
+		
+		SET outRef.FormattedInvoiceID = REPLICATE('0', 10 - LENGTH(InputRef.InvoiceId))||InputRef.InvoiceId;
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_TRIM_LTRIM_RTRIM_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.name = InputRef.name;
+		SET outRef."Remove all the leading spaces from name" = LTRIM(InputRef.name);
+		SET outRef."Remove all the leading spaces from name using TRIM" = TRIM(LEADING FROM InputRef.name);
+		SET outRef."Remove all the trailing spaces from name" = RTRIM(InputRef.name);
+		SET outRef."Remove all the trailing spaces from name using TRIM" = TRIM(TRAILING FROM InputRef.name);
+		SET outRef."Remove all the trailing and leading spaces from name" = TRIM(InputRef.name);
+		SET outRef.email = InputRef.email;
+		SET outRef."Remove the leading 'a' FROM email" = TRIM(LEADING 'a'  FROM InputRef.email);
+		SET outRef."Remove the trailing 'm' FROM email" = TRIM(TRAILING 'm'  FROM InputRef.email);
+		SET outRef."Remove the 'a' FROM email" = TRIM('a'  FROM InputRef.email);
+		SET outRef.String= 'aaaabaabaaaa';
+		SET outRef."Remove trailing and leading 'a' from String"= TRIM('a'  FROM 'aaaabaabaaaa');
+
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_SPACE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.user;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.FullName = InputRef.FirstName || SPACE(3) || InputRef.LastName;
+
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE StringManipulationFunctions_TRANSLATE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Make name field value in lower case
+		
+		DECLARE InputRef REFERENCE TO InputRoot.JSON.Data.fruits;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.Formated_1 = TRANSLATE(InputRef.name, 'a' , 'o');  -- 'a' is found and replaced with 'o'
+		SET outRef.Formated_2 = TRANSLATE(InputRef.name, 'ae' , 'o@'); -- 'a' is found and replaced with 'o' and 'e' is found and replaced with '@'
+		SET outRef.Formated_3 = TRANSLATE(InputRef.name, 'ae' , 'o'); -- 'a' is replaced with 'o' and 'e' has no match in the replace list, so it gets deleted
+		SET outRef.Formated_4 = TRANSLATE(InputRef.name, 'a'); -- 'a' gets deleted as replace list is not provided
+		SET outRef.Formated_5 = TRANSLATE(InputRef.name, 'ae'); -- 'a' and 'e' gets deleted as replace list is not provided
+
+
+		RETURN TRUE;
+	END;
+END MODULE;

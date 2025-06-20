@@ -1,0 +1,159 @@
+
+
+CREATE COMPUTE MODULE XML_Message_Buliding
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Creating XMLSNC domain output root
+		CREATE LASTCHILD OF OutputRoot.XMLNSC DOMAIN 'XMLNSC' NAME 'Employee';
+		DECLARE outRef REFERENCE TO OutputRoot.XMLNSC.Employee;
+		
+		SET outRef.Name = 'Savinay';
+		SET outRef.Id = '10745698';
+		SET outRef.Designation = 'Senior Software Engineer';
+		SET outRef.ContactNumber = '+91 9914368914' ; 
+		
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Transform_XML_TO_BLOB
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE crlf CHARACTER CAST(X'0D0A' AS CHARACTER CCSID InputRoot.Properties.CodedCharSetId);
+		
+		DECLARE inRef REFERENCE TO InputRoot.XMLNSC.Employee;
+		
+		CREATE LASTCHILD OF OutputRoot.BLOB DOMAIN 'BLOB' NAME 'BLOB';
+		
+		DECLARE outRef REFERENCE TO OutputRoot.BLOB.BLOB ;
+		
+		DECLARE messageBody CHARACTER '';
+		
+		SET messageBody = 'Savinay' || crlf;
+		SET messageBody = messageBody || '10745698' || crlf;
+		SET messageBody = messageBody || 'Senior Software Engineer' || crlf;
+		SET messageBody = messageBody || '+91 9914368914' ;
+		
+		SET outRef = CAST(messageBody AS BLOB CCSID InputRoot.Properties.CodedCharSetId); 
+		
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE XML_Message_Buliding_With_Atrributes
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		--Creating XMLSNC domain output root
+		CREATE LASTCHILD OF OutputRoot.XMLNSC DOMAIN 'XMLNSC' NAME 'Employee';
+		DECLARE outRef REFERENCE TO OutputRoot.XMLNSC.Employee;
+		
+		SET outRef.(XMLNSC.Attribute)id = '10745698'; 
+		SET outRef.Name = 'Savinay';
+		SET outRef.Designation = 'Senior Software Engineer';
+		SET outRef.ContactNumber = '+91 9914368914' ; 
+		-- XML Field Can also be created like below
+		SET outRef.Department = 'Low Code - No Code' ;
+		-- XML Atrribute Can be created like below
+		SET outRef.Department.(XMLNSC.Attribute)Id = 'LCI254' ; 
+		
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE XML_Message_Buliding_With_Atrributes_2
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inRef REFERENCE TO InputRoot.XMLNSC.Employee;
+		--Creating XMLSNC domain output root
+		CREATE LASTCHILD OF OutputRoot.XMLNSC DOMAIN 'XMLNSC' NAME 'Employee';
+		DECLARE outRef REFERENCE TO OutputRoot.XMLNSC.Employee;
+		
+		SET outRef.(XMLNSC.Field)Id = inRef.(XMLNSC.Attribute)id;
+		SET outRef.Name = inRef.Name;
+		SET outRef.Designation = inRef.Designation;
+		SET outRef.ContactNumber = inRef.ContactNumber;
+		SET outRef.DepartmentName = FIELDVALUE(inRef.Department);
+		--FirstWay
+		SET outRef.(XMLNSC.Field)DepartmentId = inRef.Department.Id;
+		--Second Way
+		SET outRef.DepartmentId2 = FIELDVALUE(inRef.Department.(XMLNSC.Attribute)Id);
+		--Third way
+		CREATE LASTCHILD OF outRef TYPE XMLNSC.Field NAME 'DepartmentId3'; 
+		SET outRef.DepartmentId3 = inRef.Department.(XMLNSC.Attribute)Id;
+		--Fourth way
+		CREATE LASTCHILD OF outRef TYPE XMLNSC.Field NAME 'DepartmentId4'; 
+		SET outRef.DepartmentId4 = inRef.Department.Id;
+		--Fifth way
+		SET outRef.DepartmentId5 TYPE = XMLNSC.Field;		
+		SET outRef.DepartmentId5 = inRef.Department.Id;
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE XML_Message_Buliding_With_Namespaces
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+--		
+--		DECLARE ns NAMESPACE 'http://company.com/genral';
+--		
+--		--Creating XMLSNC domain output root
+--		CREATE LASTCHILD OF OutputRoot.XMLNSC DOMAIN 'XMLNSC' NAMESPACE ns NAME 'Employee';
+--		DECLARE outRef REFERENCE TO OutputRoot.XMLNSC.ns:Employee;
+--		
+--		SET OutputRoot.XMLNSC.ns:Employee.(XMLNSC.NamespaceDecl)xmlns = ns;
+--		
+--		SET outRef.ns:Name = 'Savinay';
+--		SET outRef.ns:Id = '10745698';
+--		SET outRef.ns:Designation = 'Senior Software Engineer';
+--		SET outRef.ns:ContactNumber = '+91 9914368914' ; 
+		DECLARE ns NAMESPACE 'http://example.com/default';
+		DECLARE ns1 NAMESPACE 'http://example.com/person';
+		DECLARE ns2 NAMESPACE 'http://example.com/product';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC DOMAIN 'XMLNSC' NAMESPACE ns NAME 'data';
+		DECLARE outRef REFERENCE TO OutputRoot.XMLNSC.ns:data;
+		SET outRef.(XMLNSC.DoubleNamespaceDecl)xmlns = ns;
+		SET outRef.(XMLNSC.NamespaceDecl)xmlns:person = ns1;
+		SET outRef.(XMLNSC.NamespaceDecl)xmlns:product = ns2;
+		SET outRef.ns1:name = 'John';
+		SET outRef.ns2:price = 100;
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE READ_XML_Message_With_Namespaces
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		
+		DECLARE ns NAMESPACE 'http://company.com/genral';
+		DECLARE ns1 NAMESPACE 'http://company.com/emp';
+		
+		
+		DECLARE inRef REFERENCE TO InputRoot.XMLNSC.ns:Employee;
+		
+		--Creating XMLSNC domain output root
+		CREATE LASTCHILD OF OutputRoot.XMLNSC DOMAIN 'XMLNSC'  NAME 'Employee';
+		DECLARE outRef REFERENCE TO OutputRoot.XMLNSC.Employee;
+		
+--		SET outRef.(XMLNSC.DoubleNamespaceDecl)xmlns:emp = ns1;
+--		SET outRef.(XMLNSC.SingleNamespaceDecl)xmlns:emp = ns1;
+		SET outRef.(XMLNSC.NamespaceDecl)xmlns:emp = ns1;
+		
+		SET outRef.ns1:Name = inRef.ns:Name ;
+		SET outRef.ns1:Id = inRef.ns:Id;
+		SET outRef.ns1:Designation = inRef.ns:Designation;
+		SET outRef.ns1:ContactNumber = inRef.ns:ContactNumber ;
+	
+		RETURN TRUE;
+	END;
+END MODULE;

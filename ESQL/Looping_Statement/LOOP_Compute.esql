@@ -1,0 +1,122 @@
+
+
+CREATE COMPUTE MODULE LOOP_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CREATE LASTCHILD OF OutputRoot.JSON.Data.customer.orders DOMAIN 'JSON' NAME 'order';
+		DECLARE outOrderRef REFERENCE TO OutputRoot.JSON.Data.customer.orders.order;
+		SET outOrderRef TYPE = JSON.Array;
+		DECLARE inOrderRef REFERENCE TO InputRoot.JSON.Data.customer.orders.order.Item[1]; 
+		
+		X : LOOP
+			CREATE LASTCHILD OF outOrderRef NAME 'Item';
+			DECLARE outItemRef REFERENCE TO outOrderRef.[<];
+			SET outItemRef.Details = inOrderRef.orderId || '-' || inOrderRef.product;
+			MOVE inOrderRef NEXTSIBLING;
+			IF NOT LASTMOVE(inOrderRef) THEN
+				LEAVE X;
+			END IF;
+		END LOOP;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE WHILE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE inItemRef REFERENCE TO InputRoot.JSON.Data.customer.orders.order.Item[1];
+		CREATE LASTCHILD OF OutputRoot.JSON.Data.customer.orders DOMAIN 'JSON' NAME 'order';
+		DECLARE outOrderRef REFERENCE TO OutputRoot.JSON.Data.customer.orders.order;
+		SET outOrderRef TYPE = JSON.Array;
+		
+		WHILE LASTMOVE(inItemRef) DO
+			CREATE LASTCHILD OF outOrderRef NAME 'Item';
+			DECLARE outItemRef REFERENCE TO outOrderRef.[<];
+			SET outItemRef.Details = inItemRef.orderId || '-' || inItemRef.product;	
+			MOVE inItemRef NEXTSIBLING;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE REPEAT_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inItemRef REFERENCE TO InputRoot.JSON.Data.customer.orders.order.Item[1];
+		CREATE LASTCHILD OF OutputRoot.JSON.Data.customer.orders DOMAIN 'JSON' NAME 'order';
+		DECLARE outOrderRef REFERENCE TO OutputRoot.JSON.Data.customer.orders.order;
+		SET outOrderRef TYPE = JSON.Array;
+		
+		REPEAT
+			CREATE LASTCHILD OF outOrderRef NAME 'Item';
+			DECLARE outItemRef REFERENCE TO outOrderRef.[<];
+			SET outItemRef.Details = inItemRef.orderId || '-' || inItemRef.product;
+			MOVE inItemRef NEXTSIBLING;
+		UNTIL 
+			NOT LASTMOVE(inItemRef)
+		END REPEAT;
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ITERATE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 
+			DECLARE i,j INTEGER 0;
+			SET i = 0;
+			X : REPEAT
+			  SET i = i + 1;
+			  IF i IN(2, 3) THEN
+			    ITERATE X;
+			  END IF; SET j = j + 1;
+			SET OutputRoot.JSON.Data.Count[j] = i;	
+			
+			UNTIL
+			  i>= 4
+			END REPEAT X;	
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE LEAVE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 
+			DECLARE i INTEGER 1;
+			X : REPEAT
+			  
+			  IF i >= 5 THEN
+			    LEAVE X;
+			  END IF;
+			SET OutputRoot.JSON.Data.Count[i] = i;	
+			SET i = i + 1;
+			UNTIL
+			  FALSE
+			END REPEAT X;	
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE FOR_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+--		DECLARE inItemRef REFERENCE TO InputRoot.JSON.Data.customer.orders.order.Item[1];
+		CREATE LASTCHILD OF OutputRoot.JSON.Data.customer.orders DOMAIN 'JSON' NAME 'order';
+		DECLARE outOrderRef REFERENCE TO OutputRoot.JSON.Data.customer.orders.order;
+		SET outOrderRef TYPE = JSON.Array;  
+		
+		FOR itemRef AS InputRoot.JSON.Data.customer.orders.order.Item[]  DO
+			CREATE LASTCHILD OF outOrderRef NAME 'Item';
+			DECLARE outItemRef REFERENCE TO outOrderRef.[<];
+			SET outItemRef.Details = itemRef.orderId || '-' || itemRef.product;
+		END FOR;
+
+		RETURN TRUE;
+	END;
+END MODULE;

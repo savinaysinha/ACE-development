@@ -1,0 +1,22 @@
+
+
+CREATE COMPUTE MODULE CREATE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inRef REFERENCE TO InputRoot.JSON.Data.user;
+		CREATE LASTCHILD OF OutputRoot.JSON DOMAIN 'JSON' NAME 'Data';
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		CREATE FIRSTCHILD OF outRef NAME 'FirstChild' VALUE inRef.name;
+		CREATE NEXTSIBLING OF outRef.FirstChild NAME 'NextChild' VALUE inRef.email;
+		CREATE LASTCHILD OF outRef NAME 'LastChild' VALUE inRef.address;
+		CREATE PREVIOUSSIBLING OF outRef.LastChild NAME 'Gender' VALUE 'Female';
+		
+		
+		
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;

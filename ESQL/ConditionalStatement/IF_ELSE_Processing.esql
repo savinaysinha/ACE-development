@@ -1,0 +1,39 @@
+
+
+CREATE COMPUTE MODULE IF_ELSE_Processing
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.Product;
+		
+		IF inputRef.OrderType = 'Express' THEN
+			SET OutputRoot.JSON.Data.Status = 'Fast Processing';
+			
+		ELSE
+			SET OutputRoot.JSON.Data.Status = 'Standard Processing';
+			
+		END IF;
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE IF_ELSE_Processing_2
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.Product;
+		
+		IF inputRef.Amount > 1000 THEN
+			SET OutputRoot.JSON.Data.Category = 'High Value';			
+		ELSEIF inputRef.Amount BETWEEN 500 AND 1000 THEN
+			SET OutputRoot.JSON.Data.Category = 'Medium Value';
+		ELSE
+			SET OutputRoot.JSON.Data.Category = 'Low Value';
+			
+		END IF;
+
+		RETURN TRUE;
+	END;
+END MODULE;
+

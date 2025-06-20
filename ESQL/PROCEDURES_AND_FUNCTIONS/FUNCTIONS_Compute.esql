@@ -1,0 +1,41 @@
+
+
+CREATE COMPUTE MODULE FUNCTIONS_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE inRef REFERENCE TO InputRoot.JSON.Data.Addition;
+		CREATE LASTCHILD OF OutputRoot.JSON DOMAIN 'JSON' NAME 'Data';
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		SET outRef.Result = Addition(inRef.Number1 , inRef.Number2);
+
+		RETURN TRUE;
+	END;
+	
+	
+	CREATE FUNCTION Addition (num1 INTEGER,num2 INTEGER ) RETURNS INTEGER
+	BEGIN
+		RETURN num1 + num2;
+	END;
+	
+END MODULE;
+
+CREATE COMPUTE MODULE PROCEDURES_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE inRef REFERENCE TO InputRoot.JSON.Data.Addition;
+		CREATE LASTCHILD OF OutputRoot.JSON DOMAIN 'JSON' NAME 'Data';
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		CALL Addition(inRef,outRef);
+
+		RETURN TRUE;
+	END;
+	
+	CREATE PROCEDURE Addition (IN inRef REFERENCE, INOUT outRef REFERENCE )
+	BEGIN
+		SET outRef.Result = inRef.Number1 + inRef.Number2; 
+	END;
+
+	
+END MODULE;

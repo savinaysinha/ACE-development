@@ -1,0 +1,35 @@
+BROKER SCHEMA com.udemy
+
+
+CREATE COMPUTE MODULE Processing
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE varChar CHARACTER 'Savinay';
+		DECLARE varInt INTEGER 25;
+		DECLARE varBool BOOLEAN FALSE;
+		DECLARE varFloat FLOAT 10.25;
+		DECLARE varDecimal DECIMAL 132.2547;
+		DECLARE varDate DATE '2005-05-31';
+		DECLARE varTime TIME '14:36:55';
+		DECLARE varTimestamp TIMESTAMP '2005-05-31 14:36:55';
+		DECLARE varBLOB BLOB '215afa';
+		DECLARE varBit BIT B'0110';
+		
+		DECLARE varTimeRef REFERENCE TO varTime;
+		
+		SET OutputRoot.JSON.Data.Datatype.Character  = varChar;
+		SET OutputRoot.JSON.Data.Datatype.Integer  = varInt;
+		SET OutputRoot.JSON.Data.Datatype.Boolean  = varBool;
+		SET OutputRoot.JSON.Data.Datatype.Float  = varFloat;
+		SET OutputRoot.JSON.Data.Datatype.Decimal  = varDecimal;
+		SET OutputRoot.JSON.Data.Datatype.Date  = varDate;
+		SET OutputRoot.JSON.Data.Datatype.Time  = varTimeRef;
+		SET OutputRoot.JSON.Data.Datatype.Timestamp  = varTimestamp;
+		SET OutputRoot.JSON.Data.Datatype.BLOB  = varBLOB;
+		SET OutputRoot.JSON.Data.Datatype.Bit  = varBit;
+		
+
+		RETURN TRUE;
+	END;
+END MODULE;

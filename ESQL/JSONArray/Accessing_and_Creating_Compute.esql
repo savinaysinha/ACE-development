@@ -1,0 +1,25 @@
+CREATE COMPUTE MODULE Accessing_and_Creating_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN	
+		DECLARE inRef REFERENCE TO InputRoot.JSON.Data.[>];
+		
+		CREATE LASTCHILD OF OutputRoot.JSON.Data DOMAIN 'JSON' NAME 'customer';
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data.customer;
+		
+		SET outRef.customerId = inRef.customerId;
+		
+		SET outRef.orders.order TYPE = JSON.Array;
+		
+		SET outRef.orders.order.Item[1].details = CAST(inRef.orders.order.Item[1].orderId AS CHARACTER) || '-' || inRef.orders.order.Item[1].product; 
+		SET outRef.orders.order.Item[2].details = CAST(inRef.orders.order.Item[2].orderId AS CHARACTER) || '-' || inRef.orders.order.Item[2].product; 
+		SET outRef.orders.order.Item[3].details = CAST(inRef.orders.order.Item[3].orderId AS CHARACTER) || '-' || inRef.orders.order.Item[3].product; 
+		
+--		SET outRef.orders.order.Item[1] = 'T.V.';
+--		SET outRef.orders.order.Item[2] = 'Mobile';
+--		SET outRef.orders.order.Item[1] = 'A.C.';
+--		SET outRef.customerId = inRef.customerId;
+			
+		RETURN TRUE;
+	END;
+END MODULE;

@@ -1,0 +1,31 @@
+
+
+CREATE COMPUTE MODULE EXTRACT_XML_MESSAGE_BASED_ON_NAMESPACE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns1 NAMESPACE 'http://example.com/default';
+      	DECLARE ns NAMESPACE 'http://example.com/it';
+      	
+      	DECLARE inRef REFERENCE TO InputRoot.XMLNSC.ns1:root;
+      	
+      	CREATE LASTCHILD OF OutputRoot.XMLNSC DOMAIN 'XMLNSC' NAMESPACE ns NAME 'employees';
+      	SET OutputRoot.XMLNSC.ns:employees.(XMLNSC.NamespaceDecl)xmlns = ns;
+		DECLARE outRef REFERENCE TO OutputRoot.XMLNSC.ns:employees;
+		DECLARE i INTEGER 1;
+		
+		FOR emp AS inRef.ns1:company.ns:department.ns:employee[]  DO
+			
+			SET outRef.ns:employee[i].(XMLNSC.Field)ns:id = emp.(XMLNSC.Attribute)id;
+      		SET outRef.ns:employee[i].(XMLNSC.Field)ns:gender = emp.(XMLNSC.Attribute)gender;
+      		SET outRef.ns:employee[i].ns:name = emp.ns:name;
+      		SET outRef.ns:employee[i].ns:position = emp.ns:position;
+      		IF EXISTS(emp.ns:skills[]) THEN
+      			SET outRef.ns:employee[i].ns:skills = emp.ns:skills;	
+      		END IF;
+      		SET outRef.ns:employee[i].(XMLNSC.Field)ns:department = inRef.ns1:company.ns:department.(XMLNSC.Attribute)name;
+      		SET i = i+1;
+		END FOR;
+
+		RETURN TRUE;
+	END;
+END MODULE;

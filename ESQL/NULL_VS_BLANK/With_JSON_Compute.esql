@@ -1,0 +1,40 @@
+
+
+CREATE COMPUTE MODULE With_JSON_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE inputRef REFERENCE TO InputRoot.JSON.Data.Employee;
+		
+		IF inputRef.EmpAddress IS NULL THEN
+			SET OutputRoot.JSON.Data.Message = 'Error! Employee Address Not Found';
+		ELSEIF inputRef.EmpAddress = '' THEN
+			SET OutputRoot.JSON.Data.Message = 'Error! Employee Address is Blank';
+		ELSE
+			SET OutputRoot.JSON.Data.Message = inputRef.EmpAddress;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE With_XML_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+--		
+--		DECLARE inputRef REFERENCE TO InputRoot.XMLNSC.Employee;
+--		
+--		IF inputRef.EmpAddress IS NULL THEN
+--			SET OutputRoot.JSON.Data.Message = 'Error! Employee Address Not Found';
+--		ELSEIF inputRef.EmpAddress = '' THEN
+--			SET OutputRoot.JSON.Data.Message = 'Error! Employee Address is Blank';
+--		ELSE
+--			SET OutputRoot.JSON.Data.Message = inputRef.EmpAddress;
+--		END IF;
+--		
+		SET OutputRoot.XMLNSC = 'Hello';
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;

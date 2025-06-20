@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <InputMessage timestamp="1749196885575" nodeId="FCMComposite_1_1" name="Payload-1 for Success Scenario" id="1749196885575-1439">
+        <plainText>%7B%0D%0A++++%22PersonDetails%22%3A+%7B%0D%0A++++++++%22Age%22%3A+20%2C%0D%0A++++++++%22Country%22%3A+%22USA%22%2C%0D%0A++++++++%22IsEmployed%22%3A+false%2C%0D%0A++++++++%22HasDrivingLicense%22%3A+true%0D%0A++++%7D%0D%0A%7D%0D%0A</plainText>
+    </InputMessage>
+    <InputMessage timestamp="1749196939846" nodeId="FCMComposite_1_1" name="Payload-2 for Negative Scenario" id="1749196939846-1492">
+        <plainText>%7B%0D%0A++++%22PersonDetails%22%3A+%7B%0D%0A++++++++%22Age%22%3A+20%2C%0D%0A++++++++%22Country%22%3A+%22USA%22%2C%0D%0A++++++++%22IsEmployed%22%3A+false%2C%0D%0A++++++++%22HasDrivingLicense%22%3A+false%0D%0A++++%7D%0D%0A%7D%0D%0A</plainText>
+    </InputMessage>
+</MessagePool>

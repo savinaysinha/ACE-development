@@ -1,0 +1,47 @@
+
+
+CREATE COMPUTE MODULE CAST_Function_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		DECLARE ten CHARACTER '10';
+		Declare five INTEGER 5;
+		
+		SET outRef.ConcatinationResult =  ten || CAST(five AS CHARACTER);
+		
+		SET outRef.AdditionResult = CAST(ten AS INTEGER) + five;
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE CAST_Function_2_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		
+		DECLARE outRef REFERENCE TO OutputRoot.JSON.Data;		
+		
+		DECLARE dateVar DATE '2025-06-06';
+		DECLARE timeVar TIME '21:44:45';
+		
+		DECLARE dateVarchar CHARACTER CAST(dateVar AS CHARACTER FORMAT 'yyyy-MM-dd');
+		DECLARE dateVarchar1 CHARACTER CAST(dateVar AS CHARACTER FORMAT 'dd-MM-yyyy');
+		
+		
+		
+		SET outRef.Date = dateVar;
+		SET outRef.DateInChar = dateVarchar;
+		SET outRef.DateInChar_2 = dateVarchar1;
+		SET outRef.Time = CAST(timeVar AS CHARACTER FORMAT 'hh:mm:ss');
+		
+		RETURN TRUE;
+	END;
+END MODULE;
