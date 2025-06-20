@@ -1,0 +1,4 @@
+
+traceNodeLevel: true        # Enable or disable message flow 'Trace nodes'
+userTrace: 'debug'           # choose 1 of : none|debug|debugTree
+userTraceSize: '1G'         # Set the user trace size

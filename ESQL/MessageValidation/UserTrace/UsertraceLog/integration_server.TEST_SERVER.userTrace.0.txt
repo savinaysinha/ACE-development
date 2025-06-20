@@ -1,0 +1,23 @@
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+2025-06-20 17:13:54.724600    14104  UserTrace   BIP5025E: XML schema validation error 'cvc-datatype-valid.1.2: The value "one hundred one" is not a valid value for the "int" datatype.' on line '4' column '47' when parsing element '/Root/XMLNSC/ProductCatalog/Product/ProductID'.  Internal error codes: 6000, 1. 
+This error was reported by the XMLNSC parser. The XML document being parsed is not valid according to the message model. 
+The XML document has violated the rules expressed in the message model as described in the schema validation error. 
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.

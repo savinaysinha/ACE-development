@@ -1,0 +1,16 @@
+.
+.
+.
+.
+.
+.
+.
+2025-06-20 19:39:46.918676: BIP5025E: XML schema validation error 'cvc-datatype-valid.1.2: The value "one hundred one" is not a valid value for the "int" datatype.' on line '4' column '47' when parsing element '/Root/XMLNSC/ProductCatalog/Product/ProductID'.  Internal error codes: 6000, 1. 
+2025-06-20 19:39:46.918820: BIP5025E: XML schema validation error 'cvc-datatype-valid.1.2: The value "one hundred two" is not a valid value for the "int" datatype.' on line '14' column '47' when parsing element '/Root/XMLNSC/ProductCatalog/Product[2]/ProductID'.  Internal error codes: 6000, 1. 
+.
+.
+.
+.
+.
+.
+.
