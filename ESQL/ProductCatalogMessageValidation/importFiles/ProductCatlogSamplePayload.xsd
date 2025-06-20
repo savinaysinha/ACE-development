@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ProductBrand" type="xsd:string"/>
+  <xsd:element name="Description" type="xsd:string"/>
+  <xsd:element name="ProductName" type="xsd:string"/>
+  <xsd:element name="Price">
+    <xsd:complexType mixed="true">
+      <xsd:attribute name="currency" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductCatalog">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="Product"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductType" type="xsd:string"/>
+  <xsd:element name="Product">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ProductID"/>
+        <xsd:element ref="ProductName"/>
+        <xsd:element ref="ProductType"/>
+        <xsd:element ref="ProductBrand"/>
+        <xsd:element ref="Price"/>
+        <xsd:element ref="Quantity"/>
+        <xsd:element ref="Description"/>
+        <xsd:element ref="Available"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Quantity" type="xsd:string"/>
+  <xsd:element name="ProductID" type="xsd:string"/>
+  <xsd:element name="Available" type="xsd:string"/>
+</xsd:schema>

@@ -1,0 +1,30 @@
+
+
+CREATE COMPUTE MODULE OpaqueParsingExample_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+--		SET OutputRoot = InputRoot;
+		
+		DECLARE ns NAMESPACE 'http://example.com/default';
+      	DECLARE hr NAMESPACE 'http://example.com/hr';
+      	DECLARE it NAMESPACE 'http://example.com/it';
+		
+		DECLARE hrRef REFERENCE TO InputRoot.XMLNSC.ns:root.ns:company.hr:department;
+		DECLARE itRef REFERENCE TO InputRoot.XMLNSC.ns:root.ns:company.it:department;
+		
+		DECLARE hrName CHARACTER;
+		DECLARE itName CHARACTER;
+		
+		--Since opaque parsing is enabled for hr:departament tag all its child is inaccessible and null will be assigned to hrName
+		SET hrName = hrRef.hr:employee.hr:name;
+		SET itName = itRef.it:employee.it:name;
+		
+		SET OutputRoot.JSON.Data.Company.HR.Name = hrName;
+		SET OutputRoot.JSON.Data.Company.HR.IsNameNull = hrName IS NULL;
+		SET OutputRoot.JSON.Data.Company.IT.Name = itName;
+	
+		
+		RETURN TRUE;
+	END;
+END MODULE;

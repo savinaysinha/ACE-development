@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductCatalog>
+    <Product>
+        <ProductID>101</ProductID>
+        <ProductName>Wireless Bluetooth Speaker</ProductName>
+        <ProductType>Electronics</ProductType>
+        <ProductBrand>SoundMax</ProductBrand>
+        <Price currency="USD">49.99</Price>
+        <Quantity>150</Quantity>
+        <Description>Portable speaker with 10-hour battery life and waterproof design.</Description>
+        <Available>true</Available>
+    </Product>
+    <Product>
+        <ProductID>102</ProductID>
+        <ProductName>Stainless Steel Water Bottle</ProductName>
+        <ProductType>Home &amp; Kitchen</ProductType>
+        <ProductBrand>HydroPeak</ProductBrand>
+        <Price currency="USD">19.95</Price>
+        <Quantity>300</Quantity>
+        <Description>Double-wall insulated bottle, 750ml capacity, leakproof lid.</Description>
+        <Available>true</Available>
+    </Product>
+    <Product>
+        <ProductID>103</ProductID>
+         <ProductName>Gaming Mouse</ProductName>
+        <ProductType>Electronics</ProductType>
+        <ProductBrand>ClickPro</ProductBrand>
+        <Price currency="USD">39.99</Price>
+        <Quantity>250</Quantity>
+        <Description>Ergonomic design with RGB lighting and 7 programmable buttons.</Description>
+        <Available>true</Available>
+    </Product>
+</ProductCatalog>

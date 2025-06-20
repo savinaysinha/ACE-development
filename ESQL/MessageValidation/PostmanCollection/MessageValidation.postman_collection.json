@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "399b494a-5bf8-4df9-80d9-f87509f3aab9",
+		"name": "MessageValidation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Negative Scenario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<ProductCatalog>\r\n    <Product>\r\n        <ProductID>101</ProductID>\r\n        <ProductName>Wireless Bluetooth Speaker</ProductName>\r\n        <ProductType>Electronics</ProductType>\r\n        <ProductBrand>SoundMax</ProductBrand>\r\n        <Price currency=\"USD\">49.99</Price>\r\n        <Quantity>150</Quantity>\r\n        <Description>Portable speaker with 10-hour battery life and waterproof design.</Description>\r\n    </Product>\r\n    <Product>\r\n        <ProductID>102</ProductID>\r\n        <ProductName>Stainless Steel Water Bottle</ProductName>\r\n        <ProductType>Home &amp; Kitchen</ProductType>\r\n        <ProductBrand>HydroPeak</ProductBrand>\r\n        <Price currency=\"USD\">19.95</Price>\r\n        <Quantity>300</Quantity>\r\n        <Description>Double-wall insulated bottle, 750ml capacity, leakproof lid.</Description>\r\n        <Available>true</Available>\r\n    </Product>\r\n    <Product>\r\n        <ProductID>103</ProductID>\r\n         <ProductName>Gaming Mouse</ProductName>\r\n        <ProductType>Electronics</ProductType>\r\n        <ProductBrand>ClickPro</ProductBrand>\r\n        <Price currency=\"USD\">39.99</Price>\r\n        <Quantity>250</Quantity>\r\n        <Description>Ergonomic design with RGB lighting and 7 programmable buttons.</Description>\r\n        <Available>true</Available>\r\n    </Product>\r\n</ProductCatalog>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7800/test1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7800",
+					"path": [
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Positive Scenario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<ProductCatalog>\r\n    <Product>\r\n        <ProductID>101</ProductID>\r\n        <ProductName>Wireless Bluetooth Speaker</ProductName>\r\n        <ProductType>Electronics</ProductType>\r\n        <ProductBrand>SoundMax</ProductBrand>\r\n        <Price currency=\"USD\">49.99</Price>\r\n        <Quantity>150</Quantity>\r\n        <Description>Portable speaker with 10-hour battery life and waterproof design.</Description>\r\n        <Available>true</Available>\r\n    </Product>\r\n    <Product>\r\n        <ProductID>102</ProductID>\r\n        <ProductName>Stainless Steel Water Bottle</ProductName>\r\n        <ProductType>Home &amp; Kitchen</ProductType>\r\n        <ProductBrand>HydroPeak</ProductBrand>\r\n        <Price currency=\"USD\">19.95</Price>\r\n        <Quantity>300</Quantity>\r\n        <Description>Double-wall insulated bottle, 750ml capacity, leakproof lid.</Description>\r\n        <Available>true</Available>\r\n    </Product>\r\n    <Product>\r\n        <ProductID>103</ProductID>\r\n         <ProductName>Gaming Mouse</ProductName>\r\n        <ProductType>Electronics</ProductType>\r\n        <ProductBrand>ClickPro</ProductBrand>\r\n        <Price currency=\"USD\">39.99</Price>\r\n        <Quantity>250</Quantity>\r\n        <Description>Ergonomic design with RGB lighting and 7 programmable buttons.</Description>\r\n        <Available>true</Available>\r\n    </Product>\r\n</ProductCatalog>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7800/test1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7800",
+					"path": [
+						"test1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

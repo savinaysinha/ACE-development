@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "81110d6d-7084-482e-a23f-105c4827a350",
+		"name": "Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OpaqueParsingPostmanCollection",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<root xmlns=\"http://example.com/default\"\r\n      xmlns:hr=\"http://example.com/hr\"\r\n      xmlns:it=\"http://example.com/it\">\r\n    <company name=\"TechCorp\" location=\"New York\">\r\n        <hr:department id=\"D001\" name=\"Human Resources\">\r\n            <hr:employee id=\"E1001\" gender=\"female\">\r\n                <hr:name>Jane Doe</hr:name>\r\n                <hr:position>HR Manager</hr:position>\r\n                <hr:contact email=\"jane.doe@example.com\" phone=\"123-456-7890\"/>\r\n            </hr:employee>\r\n            <hr:employee id=\"E1002\" gender=\"male\">\r\n                <hr:name>John Smith</hr:name>\r\n                <hr:position>Recruiter</hr:position>\r\n                <hr:contact email=\"john.smith@example.com\" phone=\"123-456-7891\"/>\r\n            </hr:employee>\r\n        </hr:department>\r\n        <it:department id=\"D002\" name=\"Information Technology\">\r\n            <it:employee id=\"E2001\" gender=\"male\">\r\n                <it:name>Michael Chen</it:name>\r\n                <it:position>Software Engineer</it:position>\r\n                <it:skills>\r\n                    <it:skill language=\"Java\">Advanced</it:skill>\r\n                    <it:skill language=\"Python\">Intermediate</it:skill>\r\n                </it:skills>\r\n            </it:employee>\r\n        </it:department>\r\n    </company>\r\n</root>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7800/test1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7800",
+					"path": [
+						"test1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
