@@ -1,0 +1,72 @@
+
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_Add
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Create';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';		
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_Delete
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Delete';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';
+		
+		-- Below Property delete a single record based on LoopBack® object ID
+		SET OutputLocalEnvironment.Destination.Loopback.Request.id = COALESCE(InputLocalEnvironment.REST.Input.Parameters.id,NULL);
+	RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_Get
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Retrieve';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';
+		
+		-- Below Property retrives a single record based on LoopBack® object ID
+		SET OutputLocalEnvironment.Destination.Loopback.Request.id = COALESCE(InputLocalEnvironment.REST.Input.Parameters.id,NULL);
+		
+		--You can use it to set any filter that the connector supports
+--		SET OutputLocalEnvironment.Destination.Loopback.Request.filterString = '{"where":{"first_name": "john"}}';
+		
+		SET OutputLocalEnvironment.Destination.Loopback.Request.filterString = COALESCE(InputLocalEnvironment.HTTP.Input.QueryString.filterString,NULL);
+	RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE EmployeeManagementSystem_Update
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Below Property override the operation property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.operation = 'Update';
+		
+		-- Below Property override the Loopback object property of Looback Request node
+		SET OutputLocalEnvironment.Destination.Loopback.Request.object = 'employee';
+		
+		DECLARE fieldNamesToBeUpdated CHARACTER '';
+		
+		FOR field AS InputRoot.JSON.Data.[]  DO
+			SET fieldNamesToBeUpdated = fieldNamesToBeUpdated || ', ' || FIELDNAME(field);
+		END FOR;
+		
+				
+		SET OutputLocalEnvironment.Destination.Loopback.Request.externalIdName = TRIM(LEADING ', ' FROM fieldNamesToBeUpdated);
+		SET OutputLocalEnvironment.Destination.Loopback.Request.Id = COALESCE(InputLocalEnvironment.REST.Input.Parameters.id,NULL);
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+END MODULE;
