@@ -81,3 +81,21 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.ibm.mq.runtime 1 0 2025-06-21 15:48:02.600
+!MESSAGE 
+
+!ENTRY com.ibm.mq.runtime 1 0 2025-06-21 15:48:02.600
+!MESSAGE C:\Program Files\IBM\ACE\12.0.12.4\tools>mqsifindmqpath
+
+!ENTRY com.ibm.mq.runtime 1 0 2025-06-21 15:48:04.265
+!MESSAGE BIP8071I: Successful command completion. C:\Program Files\IBM\MQ
+
+!ENTRY com.ibm.mq.runtime 1 0 2025-06-21 15:48:04.266
+!MESSAGE MQ Install location found:C:/Program Files/IBM/MQ
+
+!ENTRY com.ibm.mq.runtime 1 0 2025-06-21 15:48:04.266
+!MESSAGE 
+
+!ENTRY com.ibm.etools.mft.uri 0 0 2025-06-21 15:49:55.993
+!MESSAGE 

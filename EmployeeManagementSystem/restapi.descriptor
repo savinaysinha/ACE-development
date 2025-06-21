@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:restapiDescriptor xmlns="http://com.ibm.etools.mft.descriptor.base" xmlns:ns2="http://com.ibm.etools.mft.descriptor.restapi" definitionType="swagger_20" definitionFile="swagger.json" implementation="gen/EmployeeManagementSystem.msgflow" https="false" definitionWithExtRef="false" faultFormat="JSON">
+    <ns2:operations>
+        <ns2:operation name="addEmployee" implementation="addEmployee.subflow"/>
+        <ns2:operation name="deleteEmployee" implementation="deleteEmployee.subflow"/>
+        <ns2:operation name="deleteId" implementation="deleteId.subflow"/>
+        <ns2:operation name="getEmployee" implementation="getEmployee.subflow"/>
+        <ns2:operation name="getEmployeebyId" implementation="getEmployeebyId.subflow"/>
+        <ns2:operation name="putId" implementation="putId.subflow"/>
+        <ns2:operation name="updateEmployee" implementation="updateEmployee.subflow"/>
+    </ns2:operations>
+    <ns2:errorHandlers/>
+</ns2:restapiDescriptor>

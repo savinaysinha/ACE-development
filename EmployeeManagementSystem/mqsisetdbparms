@@ -1,0 +1,1 @@
+mqsisetdbparms --work-dir "C:\Users\ACEBOX\IBM\ACET12\workspace1\TEST_SERVER" -n loopback::mongodbds -u XXXXXXXXX -p XXXXXXXXX
