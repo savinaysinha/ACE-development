@@ -26,9 +26,6 @@
 <workingSet editPageId="com.ibm.etools.mft.navigator.BrokerWorkingSet.AppLib" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1750501193717_9" label="[DataTypes]" name="[DataTypes]">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/DataTypes" type="4"/>
 </workingSet>
-<workingSet editPageId="com.ibm.etools.mft.navigator.BrokerWorkingSet.AppLib" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1750501193736_10" label="[EMSusingMongoDB]" name="[EMSusingMongoDB]">
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/EMSusingMongoDB" type="4"/>
-</workingSet>
 <workingSet editPageId="com.ibm.etools.mft.navigator.BrokerWorkingSet.AppLib" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1750501193759_11" label="[ExceptionHandlingLIB]" name="[ExceptionHandlingLIB]">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ExceptionHandlingLIB" type="4"/>
 </workingSet>
@@ -72,5 +69,11 @@
 </workingSet>
 <workingSet editPageId="com.ibm.etools.mft.navigator.BrokerWorkingSet.AppLib" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1750501193948_24" label="[XML_Message]" name="[XML_Message]">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/XML_Message" type="4"/>
+</workingSet>
+<workingSet editPageId="com.ibm.etools.mft.navigator.BrokerWorkingSet.AppLib" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1750514844363_25" label="[EmployeeManagementSystem]" name="[EmployeeManagementSystem]">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/EmployeeManagementSystem" type="4"/>
+</workingSet>
+<workingSet editPageId="com.ibm.etools.mft.navigator.BrokerWorkingSet.AppLib" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1750514880306_26" label="[EMSusingMongoDB]" name="[EMSusingMongoDB]">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/EMSusingMongoDB" type="4"/>
 </workingSet>
 </workingSetManager>

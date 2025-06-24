@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com_ibm_connector_loopback_ComIbmRequest.msgnode="com/ibm/connector/loopback/ComIbmRequest.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="LoopbackRequestNodeLIB/LoopbackRequestNode.subflow" nsPrefix="LoopbackRequestNodeLIB_LoopbackRequestNode.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true" nodeLayoutStyle="RECTANGLE">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.dataSource" name="dataSource" lowerBound="1" defaultValueLiteral="dataSourceName">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.object" name="object" lowerBound="1" defaultValueLiteral="tableName">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.operation" name="operation" eType="//%" defaultValueLiteral="create"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.securityIdentity" name="securityIdentity">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.timeoutMilliseconds" name="timeoutMilliseconds" defaultValueLiteral="120000">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <translation xmi:type="utility:TranslatableString" key="LoopbackRequestNode" bundleName="LoopbackRequestNodeLIB/LoopbackRequestNode" pluginId="LoopbackRequestNodeLIB"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/LoopbackRequestNodeLIB/icons/full/obj16/LoopbackRequestNode.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/LoopbackRequestNodeLIB/icons/full/obj30/LoopbackRequestNode.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="20,20">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="LoopbackRequestNodeLIB/LoopbackRequestNode" pluginId="LoopbackRequestNodeLIB"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="520,20">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="LoopbackRequestNodeLIB/LoopbackRequestNode" pluginId="LoopbackRequestNodeLIB"/>
+      </nodes>
+      <nodes xmi:type="com_ibm_connector_loopback_ComIbmRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="265,186" connectorName="iib-loopback-connector" operation="create" timeoutMilliseconds="120000" dataLocation="$Body" outputDataLocation="$OutputRoot" copyToLocalEnv="true" messageDomainProperty="JSON">
+        <translation xmi:type="utility:ConstantString" string="Loop Back Request"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer>
+      <propertyDescriptor groupName="Group.Basic" configurable="true" describedAttribute="Property.dataSource">
+        <propertyName xmi:type="utility:TranslatableString" key="Property.dataSource" bundleName="com/ibm/connector/loopback/ComIbmRequest" pluginId="com.ibm.etools.mft.connector.loopback"/>
+        <propertyDescriptor groupName="Group.Basic" configurable="true" describedAttribute="Property.object">
+          <propertyName xmi:type="utility:TranslatableString" key="Property.object" bundleName="com/ibm/connector/loopback/ComIbmRequest" pluginId="com.ibm.etools.mft.connector.loopback"/>
+          <propertyDescriptor groupName="Group.Basic" describedAttribute="Property.operation">
+            <propertyName xmi:type="utility:TranslatableString" key="Property.operation" bundleName="com/ibm/connector/loopback/ComIbmRequest" pluginId="com.ibm.etools.mft.connector.loopback"/>
+            <propertyDescriptor groupName="Group.Basic" configurable="true" describedAttribute="Property.securityIdentity">
+              <propertyName xmi:type="utility:TranslatableString" key="Property.securityIdentity" bundleName="com/ibm/connector/loopback/ComIbmRequest" pluginId="com.ibm.etools.mft.connector.loopback"/>
+              <propertyDescriptor groupName="Group.Basic" propertyEditor="com.ibm.etools.mft.ibmnodes.editors.NonZeroPositiveIntegerPropertyEditor" configurable="true" describedAttribute="Property.timeoutMilliseconds">
+                <propertyName xmi:type="utility:TranslatableString" key="Property.timeoutMilliseconds" bundleName="com/ibm/connector/loopback/ComIbmRequest" pluginId="com.ibm.etools.mft.connector.loopback"/>
+              </propertyDescriptor>
+            </propertyDescriptor>
+          </propertyDescriptor>
+        </propertyDescriptor>
+      </propertyDescriptor>
+    </propertyOrganizer>
+    <attributeLinks promotedAttribute="Property.dataSource" overriddenNodes="FCMComposite_1_1">
+      <overriddenAttribute href="com/ibm/connector/loopback/ComIbmRequest.msgnode#Property.dataSource"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.object" overriddenNodes="FCMComposite_1_1">
+      <overriddenAttribute href="com/ibm/connector/loopback/ComIbmRequest.msgnode#Property.object"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.operation" overriddenNodes="FCMComposite_1_1">
+      <overriddenAttribute href="com/ibm/connector/loopback/ComIbmRequest.msgnode#Property.operation"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.securityIdentity" overriddenNodes="FCMComposite_1_1">
+      <overriddenAttribute href="com/ibm/connector/loopback/ComIbmRequest.msgnode#Property.securityIdentity"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.timeoutMilliseconds" overriddenNodes="FCMComposite_1_1">
+      <overriddenAttribute href="com/ibm/connector/loopback/ComIbmRequest.msgnode#Property.timeoutMilliseconds"/>
+    </attributeLinks>
+    <stickyBoard/>
+  </eClassifiers>
+  <eClassifiers xmi:type="ecore:EEnum">
+    <eLiterals xmi:id="operation.create" name="create"/>
+    <eLiterals xmi:id="operation.retrieve" name="retrieve" value="1"/>
+    <eLiterals xmi:id="operation.update" name="update" value="2"/>
+    <eLiterals xmi:id="operation.delete" name="delete" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>
