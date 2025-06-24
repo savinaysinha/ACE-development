@@ -1,0 +1,14 @@
+{
+  "mongodbds": {
+    "host": "cluster0.xxxxxxx.mongodb.net",
+    "protocol": "mongodb+srv",
+    "port": 27017,
+    "database": "ems",
+    "name": "mongodbds",
+    "connector": "mongodb",
+	"username": "xxxxxxxx", 
+    "password": "xxxxxxxxx",
+	"ssl" : true,
+	"authSource" : "ems"
+  }
+}
